@@ -1,0 +1,2080 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <link rel="stylesheet" href="assets/">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alborzi 11</title>
+    <!-- لینک فونت‌آیکون FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- لینک فونت وزیر -->
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/font-face.css" rel="stylesheet" type="text/css">
+    <!-- لینک animate.css برای انیمیشن‌ها -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        /* استایل آواتار کاربر */
+.user-avatar {
+    font-size: 2.5rem;
+    cursor: pointer;
+    transition: var(--transition);
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.user-avatar:hover {
+    transform: scale(1.1);
+    color: var(--secondary-color);
+}
+
+/* مدال اطلاعات کاربر */
+.user-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+}
+
+.user-modal-content {
+    background-color: rgba(0, 0, 0, 0.8);
+    margin: 10% auto;
+    padding: 2rem;
+    border-radius: 15px;
+    max-width: 400px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.user-form-group {
+    margin-bottom: 1rem;
+}
+
+.user-form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.user-form-group input {
+    width: 100%;
+    padding: 0.8rem;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-family: Vazir, Arial, sans-serif;
+}
+
+.user-form-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+}
+
+.user-form-actions button {
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: var(--transition);
+    font-family: Vazir, Arial, sans-serif;
+}
+
+.save-btn {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+.cancel-btn {
+    background-color: #f44336;
+    color: white;
+}
+
+/* حالت روشن برای مدال کاربر */
+body.light-mode .user-modal-content {
+    background-color: rgba(255, 255, 255, 0.9);
+    color: var(--text-color);
+}
+
+body.light-mode .user-form-group input {
+    background-color: rgba(255, 255, 255, 0.9);
+    color: var(--text-color);
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+        :root {
+            --primary-color: #1a237e;
+            --secondary-color: #ff5722;
+            --accent-color: #4caf50;
+            --dark-color: #0d0f36;
+            --light-color: #f5f5f5;
+            --text-color: #333;
+            --text-light: #fff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+
+        
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+
+   /* From Uiverse.io by MuhammadHasann */ 
+.sign {
+  --black-700: hsla(0 0% 12% / 1);
+  --border_radius: 9999px;
+  --transtion: 0.3s ease-in-out;
+  --offset: 2px;
+
+  cursor: pointer;
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  transform-origin: center;
+
+  padding: 1rem 2rem;
+  background-color: transparent;
+
+  border: none;
+  border-radius: var(--border_radius);
+  transform: scale(calc(1 + (var(--active, 0) * 0.1)));
+
+  transition: transform var(--transtion);
+
+  font-family: Arial, Helvetica, sans-serif;
+  ;
+}
+
+.sign::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 100%;
+  height: 100%;
+  background-color: var(--black-700);
+
+  border-radius: var(--border_radius);
+  box-shadow: inset 0 0.5px hsl(0, 0%, 100%), inset 0 -1px 2px 0 hsl(0, 0%, 0%),
+    0px 4px 10px -4px hsla(0 0% 0% / calc(1 - var(--active, 0))),
+    0 0 0 calc(var(--active, 0) * 0.375rem) hsl(260 97% 50% / 0.75);
+
+  transition: all var(--transtion);
+  z-index: 0;
+}
+
+.sign::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 100%;
+  height: 100%;
+  background-color: hsla(260 97% 61% / 0.75);
+  background-image: radial-gradient(
+      at 51% 89%,
+      hsla(266, 45%, 74%, 1) 0px,
+      transparent 50%
+    ),
+    radial-gradient(at 100% 100%, hsla(266, 36%, 60%, 1) 0px, transparent 50%),
+    radial-gradient(at 22% 91%, hsla(266, 36%, 60%, 1) 0px, transparent 50%);
+  background-position: top;
+
+  opacity: var(--active, 0);
+  border-radius: var(--border_radius);
+  transition: opacity var(--transtion);
+  z-index: 2;
+}
+
+.sign:is(:hover, :focus-visible) {
+  --active: 1;
+}
+.sign:active {
+  transform: scale(1);
+}
+
+.sign .dots_border {
+  --size_border: calc(100% + 2px);
+
+  overflow: hidden;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: var(--size_border);
+  height: var(--size_border);
+  background-color: transparent;
+
+  border-radius: var(--border_radius);
+  z-index: -10;
+}
+
+.sign .dots_border::before {
+  content: "";
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transform-origin: left;
+  transform: rotate(0deg);
+
+  width: 100%;
+  height: 2rem;
+  background-color: white;
+
+  mask: linear-gradient(transparent 0%, white 120%);
+  animation: rotate 2s linear infinite;
+}
+
+@keyframes rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.sign .sparkle {
+  position: relative;
+  z-index: 10;
+
+  width: 1.75rem;
+}
+
+.sign .sparkle .path {
+  fill: currentColor;
+  stroke: currentColor;
+
+  transform-origin: center;
+
+  color: hsl(0, 0%, 100%);
+}
+
+.sign:is(:hover, :focus) .sparkle .path {
+  animation: path 1.5s linear 0.5s infinite;
+}
+
+.sign .sparkle .path:nth-child(1) {
+  --scale_path_1: 1.2;
+}
+.sign .sparkle .path:nth-child(2) {
+  --scale_path_2: 1.2;
+}
+.sign.sparkle .path:nth-child(3) {
+  --scale_path_3: 1.2;
+}
+
+@keyframes path {
+  0%,
+  34%,
+  71%,
+  100% {
+    transform: scale(1);
+  }
+  17% {
+    transform: scale(var(--scale_path_1, 1));
+  }
+  49% {
+    transform: scale(var(--scale_path_2, 1));
+  }
+  83% {
+    transform: scale(var(--scale_path_3, 1));
+  }
+}
+
+.sign .text_button {
+  position: relative;
+  z-index: 10;
+
+  background-image: linear-gradient(
+    90deg,
+    hsla(0 0% 100% / 1) 0%,
+    hsla(0 0% 100% / var(--active, 0)) 120%
+  );
+  background-clip: text;
+
+  font-size: 1rem;
+  color: transparent;
+}
+
+        body {
+    font-family: Vazir, Arial, sans-serif;
+    background: url('https://lh4.googleusercontent.com/proxy/q3DdXmb9X1xcJJnWapVKfHZ87Dsd9EXd9mViKstVsrZu6TfnIIsFSbYLlbGBalVl5y3E13_-Al6ZnTok8ghnSo0OlkVUIRIK2hO7e1sj7xoleTbxdIFh2858') no-repeat center center fixed;
+    background-size: cover;
+    color: var(--text-light);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.6;
+    position: relative;
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(26, 35, 126, 0.8), rgba(13, 15, 54, 0.9));
+    z-index: -1;
+}
+        /* هدر جدید */
+        header {
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo img {
+            height: 40px;
+            border-radius: 50%;
+        }
+        
+        .logo h1 {
+            margin: 0;
+            font-size: 1.5rem;
+            background: none;
+            padding: 0;
+        }
+        
+        .theme-switcher {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+        
+        .theme-switcher:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        /* محتوای اصلی */
+        .main-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            padding: 1rem;
+            gap: 1rem;
+            flex-grow: 1;
+        }
+        
+        /* سایدبار چپ */
+        .left-sidebar {
+            width: 280px;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        /* سایدبار راست */
+        .right-sidebar {
+            width: 280px;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        /* بخش مرکزی */
+        .center-content {
+            flex: 1;
+            min-width: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        
+        /* کارت‌های عمومی */
+        .card {
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .card h3 {
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
+            font-size: 1.2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 0.5rem;
+        }
+        
+        /* سرچ بار مدرن */
+        .search-container {
+            width: 100%;
+            max-width: 700px;
+        }
+        
+        .search-form {
+            position: relative;
+            width: 100%;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 1rem 1rem 1rem 3rem;
+            font-size: 1rem;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            outline: none;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: var(--transition);
+            font-family: Vazir, Arial, sans-serif;
+            backdrop-filter: blur(5px);
+        }
+        
+        .search-input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .search-input:focus {
+            border-color: var(--secondary-color);
+            background-color: rgba(0, 0, 0, 0.3);
+            box-shadow: 0 0 0 3px rgba(255, 87, 34, 0.3);
+        }
+        
+        .search-button {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.7);
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+        
+        .search-button:hover {
+            color: var(--secondary-color);
+        }
+        
+        /* دکمه‌های اصلی */
+        .buttons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1rem;
+            width: 100%;
+            max-width: 900px;
+        }
+        
+        .main-button {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 1rem 1.5rem;
+            background: linear-gradient(135deg, rgba(0, 86, 179, 0.9), rgba(0, 65, 135, 0.9));
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-family: Vazir, Arial, sans-serif;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: right;
+            box-shadow: var(--shadow);
+            text-decoration: none;
+        }
+        
+        .main-button i {
+            font-size: 1.2rem;
+        }
+        
+        .main-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 14px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(135deg, rgba(0, 86, 179, 1), rgba(0, 65, 135, 1));
+        }
+        
+        .main-button:active {
+            transform: translateY(1px);
+        }
+        
+        /* ساعت و تاریخ */
+        .clock-card {
+            text-align: center;
+        }
+        
+        .time {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 0.5rem 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ff5722, #ff9800);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .date {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        /* چک لیست */
+        .checklist {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .task-item {
+            display: flex;
+            align-items: center;
+            padding: 8px;
+            margin-bottom: 8px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+        
+        .task-checkbox {
+            margin-left: 10px;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        
+        .task-text {
+            flex: 1;
+        }
+        
+        .task-completed {
+            text-decoration: line-through;
+            opacity: 0.7;
+        }
+        
+        .delete-task {
+            background: none;
+            border: none;
+            color: #f44336;
+            cursor: pointer;
+            margin-right: 5px;
+        }
+        
+        .add-task {
+            display: flex;
+            margin-top: 15px;
+        }
+        
+        .add-task input {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+        
+        .add-task button {
+            margin-right: 10px;
+            padding: 8px 15px;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        /* ماشین حساب پیشرفته (کوچک شده) */
+        .calculator {
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            border-radius: 15px;
+            padding: 1rem;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .calculator-display {
+            width: 100%;
+            height: 50px;
+            margin-bottom: 1rem;
+            padding: 0.5rem 1rem;
+            font-size: 1.5rem;
+            text-align: right;
+            background-color: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            direction: ltr;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .calculator-keys {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.5rem;
+        }
+
+        .calculator button {
+            width: 100%;
+            aspect-ratio: 1/1;
+            font-size: 1rem;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            margin: 0;
+            box-shadow: var(--shadow);
+            color: white;
+        }
+
+        .key-zero {
+            grid-column: span 2;
+            border-radius: 50px !important;
+            aspect-ratio: auto !important;
+        }
+
+        .key-operator {
+            background-color: var(--secondary-color);
+        }
+
+        .key-equals {
+            background-color: var(--accent-color);
+        }
+
+        .key-clear {
+            background-color: #f44336;
+        }
+
+        .key-number {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .key-dot {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .key-function {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .calculator button:hover {
+            transform: scale(0.95);
+            opacity: 0.9;
+        }
+
+        .calculator button:active {
+            transform: scale(0.9);
+        }
+        
+        /* جعبه جملات انگیزشی */
+        .motivation-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 1rem;
+        }
+        
+        .motivation-quote {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+        
+        .motivation-author {
+            font-weight: bold;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .motivation-btn {
+            padding: 0.5rem 1rem;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .motivation-btn:hover {
+            background-color: #3d8b40;
+        }
+        
+        /* پخش کننده موسیقی */
+        .music-player {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .music-controls {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+    
+        
+        .music-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .music-btn:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .play-btn {
+            background-color: var(--secondary-color);
+            width: 60px;
+            height: 60px;
+        }
+        
+        .play-btn:hover {
+            background-color: #7b1d00;
+        }
+        
+        .music-info {
+            text-align: center;
+        }
+        
+        .music-title {
+            font-weight: bold;
+            margin-bottom: 0.3rem;
+        }
+        
+        .music-artist {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .progress-container {
+            width: 100%;
+            height: 5px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            margin-top: 0.5rem;
+            cursor: pointer;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background-color: var(--secondary-color);
+            border-radius: 5px;
+            width: 0%;
+        }
+
+
+        /*tablo elanat*/
+
+        .elanat{
+            display: flex;
+            flex-direction: column;
+            gap:0.5rem;
+            
+            
+        }
+        
+        /* لینک‌های سریع */
+        .quick-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .quick-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0.8rem;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .quick-link:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateX(-5px);
+        }
+        
+        /* فوتر */
+        footer {
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 1rem;
+            text-align: center;
+            font-size: 0.9rem;
+            margin-top: auto;
+            backdrop-filter: blur(10px);
+        }
+        
+        /* حالت تیره/روشن */
+        body.light-mode {
+            background: linear-gradient(135deg, #f5f7fa, #e4e8f0);
+            color: var(--text-color);
+        }
+        
+        body.light-mode .card,
+        body.light-mode .calculator,
+        body.light-mode header,
+        body.light-mode footer {
+            background-color: rgba(255, 255, 255, 0.8);
+            color: var(--text-color);
+        }
+        
+        body.light-mode .search-input {
+            background-color: rgba(255, 255, 255, 0.9);
+            color: var(--text-color);
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+        
+        body.light-mode .search-input::placeholder {
+            color: rgba(0, 0, 0, 0.5);
+        }
+        
+        body.light-mode .add-task input {
+            background-color: rgba(255, 255, 255, 0.9);
+            color: var(--text-color);
+        }
+        
+        body.light-mode .calculator-display {
+            background-color: rgba(255, 255, 255, 0.9);
+            color: var(--text-color);
+        }
+        
+        body.light-mode .key-number,
+        body.light-mode .key-dot {
+            background-color: rgba(0, 0, 0, 0.05);
+            color: var(--text-color);
+        }
+        
+        body.light-mode .quick-link {
+            background-color: rgba(0, 0, 0, 0.05);
+            color: var(--text-color);
+        }
+        
+        body.light-mode .quick-link:hover {
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+        
+        body.light-mode .motivation-author {
+            color: #d84315;
+        }
+        
+        body.light-mode .task-item {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+        
+        body.light-mode .add-task input {
+            background-color: rgba(255, 255, 255, 0.9);
+            color: var(--text-color);
+        }
+        
+        /* مدال مدیریت لینک‌ها */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: rgba(0, 0, 0, 0.8);
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            width: 80%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .close-modal {
+            color: #aaa;
+            float: left;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close-modal:hover {
+            color: white;
+        }
+
+        .link-list {
+            margin-top: 20px;
+        }
+
+        .link-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .link-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex: 1;
+        }
+
+        .link-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .action-btn {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+            padding: 5px;
+            border-radius: 5px;
+            transition: var(--transition);
+        }
+
+        .edit-btn {
+            background-color: var(--accent-color);
+        }
+
+        .delete-btn {
+            background-color: #f44336;
+        }
+
+        .action-btn:hover {
+            opacity: 0.8;
+        }
+
+        /* حالت روشن برای مدال */
+        body.light-mode .modal-content {
+            background-color: rgba(255, 255, 255, 0.9);
+            color: var(--text-color);
+        }
+
+        body.light-mode .link-item {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        body.light-mode .action-btn {
+            color: white;
+        }
+        
+        /* رسپانسیو */
+        @media (max-width: 1200px) {
+            .left-sidebar,
+            .right-sidebar {
+                width: 240px;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .left-sidebar,
+            .right-sidebar {
+                width: 100%;
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+            
+            .left-sidebar > *,
+            .right-sidebar > * {
+                flex: 1 1 300px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .buttons-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .modal-content {
+                width: 95%;
+            }
+        }
+        
+        /* انیمیشن‌ها */
+        .animate-pop {
+            animation: popIn 0.3s ease-out;
+        }
+        
+        @keyframes popIn {
+            0% {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        
+        /* اسکرول بار */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.1);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <!-- هدر جدید -->
+    <header>
+        <div class="logo">
+            <div class="user-avatar" id="userAvatar">
+               
+            </div>
+        </div>
+
+            <h1 id="welcomeMessage">پنل کاربری پایه یازدهم البرز</h1>
+   
+        
+             
+        </div>
+
+        <div>
+
+      <button     class="sign"    onclick="window.location.href='signin.html'">
+  <div class="dots_border"></div>
+  
+  <span class="text_button">Sign in</span>
+</button>
+</div>
+    </header>
+
+    <!-- محتوای اصلی -->
+    <div class="main-content">
+        <!-- سایدبار چپ -->
+        <div class="left-sidebar">
+            <!-- ویجت ساعت -->
+            <div class="card clock-card animate__animated animate__fadeInLeft">
+                <h3><i class="fas fa-clock"></i> ساعت و تاریخ</h3>
+                <div class="time" id="time"></div>
+                <div class="date" id="date"></div>
+            </div>
+
+
+            
+            
+            
+            <!-- جعبه جملات انگیزشی -->
+            <div class="card motivation-box animate__animated animate__fadeInLeft animate__delay-1s">
+                <h3><i class="fas fa-quote-left"></i> جمله انگیزشی روز</h3>
+                <div class="motivation-quote" id="motivationQuote">
+                    موفقیت مسیری است نه مقصد. مهم این است که در حال پیشرفت باشید.
+                </div>
+                <div class="motivation-author" id="motivationAuthor">- بروس لی</div>
+                <button class="motivation-btn" onclick="newQuote()">
+                    <i class="fas fa-sync-alt"></i> جمله جدید
+                </button>
+            </div>
+
+<div class="card telegram-card animate__animated animate__fadeInLeft animate__delay-3s">
+    <h3><i class="fab fa-telegram"></i> کانال تلگرام</h3>
+    <div style="text-align: center; padding: 10px;">
+        <a href="https://t.me/c/2423682950/99" target="_blank">
+            <img src="assets\telegram-qr.png" alt="QR Code کانال تلگرام" style="max-width: 100%; border-radius: 10px; cursor: pointer;">
+        </a>
+        <i class="fa-regular fa-hand-point-up"></i><i class="fa-regular fa-hand-point-up"></i><i class="fa-regular fa-hand-point-up"></i>
+        <p style="margin-top: 10px;"> برای ورود به کانال برنامه ریزی اسکن کنید</p>
+    </div>
+</div>
+            <!-- چک لیست -->
+           <!-- دکمه Microsoft To Do -->
+<div class="card animateanimated animatefadeInLeft animate__delay-2s">
+    <h3><i class="fas fa-tasks"></i> مدیریت وظایف</h3>
+    <div style="text-align: center; padding: 10px;">
+        <a href="https://to-do.live.com/tasks/" target="_blank" class="main-button">
+            <i class="fas fa-tasks"></i> باز کردن Microsoft To Do
+        </a>
+        <p style="margin-top: 10px;">برای مدیریت پیشرفته وظایف خود، وارد وسافت تو دو شوید.</p>
+    </div>
+</div>
+
+
+        </div>
+        
+        <!-- بخش مرکزی -->
+        <div class="center-content">
+            <!-- سرچ بار -->
+            <div class="search-container animate__animated animate__fadeInDown">
+                <form class="search-form" action="https://www.google.com/search" method="GET" target="_blank">
+                    <input type="text" name="q" class="search-input" placeholder="جستجو در گوگل..." required>
+                    <button type="submit" class="search-button">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </form>
+            </div>
+            
+            <!-- دکمه‌های اصلی -->
+            <div class="buttons-grid">
+                <a href="https://chat.deepseek.com/" target="_blank" class="main-button animate__animated animate__fadeIn">
+                    <i class="fas fa-robot"></i> چت با هوش مصنوعی
+
+                     </a>
+                <a href="https://www.kanoon.ir/Student" target="_blank" class="main-button animate__animated animate__fadeIn animate__delay-1s">
+                    <i class="fas fa-user-graduate"></i> قلمچی
+
+                </a>
+                <a href="planner.html" target="_blank" class="main-button animate__animated animate__fadeIn animate__delay-2s">
+                    <i class="fas fa-check-square"></i> برنامه ریزی شخصی
+                </a>
+                <a href="http://mandegaralborz.tikkhan.com/" target="_blank" class="main-button animate__animated animate__fadeIn animate__delay-1s">
+                    <i class="fas fa-book-open"></i> تیکخوان البرز
+                </a>
+                <a href="classes.html" target="_blank" class="main-button animate__animated animate__fadeIn animate__delay-2s">
+                    <i class="fas fa-chalkboard-teacher"></i> کلاس های من
+                </a>
+                <a href="http://mandegaralborz.sch.ir/Default.aspx?PageId=20498" target="_blank" class="main-button animate__animated animate__fadeIn animate__delay-3s">
+                    <i class="fas fa-video"></i> فیلم‌های آموزشی
+                </a>
+                <a href="http://mandegaralborz.sch.ir/Default.aspx?PageId=20626" target="_blank" class="main-button animate__animated animate__fadeIn">
+                    <i class="fas fa-exchange-alt"></i> یادگیری معکوس
+                </a>
+
+                <a href="https://www.weblite.me/" target="_blank" class="main-button animate__animated animate__fadeIn animate__delay-2s">
+                    <i class="fa-solid fa-pencil"></i> آزمون 
+
+
+                     <a href="https://app.lernito.com/home" target="_blank" class="main-button animate__animated animate__fadeIn animate__delay-1s">
+                   <i class="fa-regular fa-file-lines"></i> لرنیتو
+                </a>
+
+                <a href="https://mandegaralborz.modabberonline.com/FirstPages/Student.aspx" target="_blank" class="main-button animate__animated animate__fadeIn animate__delay-1s">
+                    <i class="fas fa-user-graduate"></i> مدبر البرز
+                </a>
+                <a href="https://www.google.com/search?q=periodic+table" target="_blank" class="main-button animate__animated animate__fadeIn animate__delay-1s">
+                    <i class="fa-solid fa-calendar-days"></i> جدول مندلیف
+                </a>
+                
+                <a href="#" class="main-button animate__animated animate__fadeIn animate__delay-3s" id="addLinkBtn">
+                    <i class="fas fa-plus"></i> افزودن لینک جدید
+                </a>
+                <a href="#" class="main-button animate__animated animate__fadeIn animate__delay-3s" id="manageLinksBtn">
+                    <i class="fas fa-cog"></i> مدیریت لینک‌ها
+
+
+                    
+                </a>
+            </div>
+        </div>
+        
+        <!-- سایدبار راست -->
+        <div class="right-sidebar">
+            <!-- ماشین حساب (کوچک شده) -->
+            <div class="card calculator animate__animated animate__fadeInRight">
+                <h3><i class="fas fa-calculator"></i> ماشین حساب</h3>
+                <input type="text" class="calculator-display" id="calc-display" value="0" disabled>
+                <div class="calculator-keys">
+                    <button class="key-clear" onclick="clearCalc()">C</button>
+                    <button class="key-function" onclick="toggleSign()">±</button>
+                    <button class="key-function" onclick="calcPercentage()">%</button>
+                    <button class="key-operator" onclick="appendOperator('/')">÷</button>
+                    
+                    <button class="key-number" onclick="appendNumber('7')">7</button>
+                    <button class="key-number" onclick="appendNumber('8')">8</button>
+                    <button class="key-number" onclick="appendNumber('9')">9</button>
+                    <button class="key-operator" onclick="appendOperator('*')">×</button>
+                    
+                    <button class="key-number" onclick="appendNumber('4')">4</button>
+                    <button class="key-number" onclick="appendNumber('5')">5</button>
+                    <button class="key-number" onclick="appendNumber('6')">6</button>
+                    <button class="key-operator" onclick="appendOperator('-')">−</button>
+                    
+                    <button class="key-number" onclick="appendNumber('1')">1</button>
+                    <button class="key-number" onclick="appendNumber('2')">2</button>
+                    <button class="key-number" onclick="appendNumber('3')">3</button>
+                    <button class="key-operator" onclick="appendOperator('+')">+</button>
+                    
+                    <button class="key-number key-zero" onclick="appendNumber('0')">0</button>
+                    <button class="key-dot" onclick="appendDecimal()">.</button>
+                    <button class="key-equals" onclick="calculate()">=</button>
+                </div>
+            </div>
+
+
+
+ 
+    
+    
+    
+    <div class="elanat">
+<img  src="assets\events\IMG_۲۰۲۵۱۰۱۴_۰۶۳۱۲۴.jpg" alt="" height="480px"
+>
+    </div>
+                
+            <!-- پخش کننده موسیقی -->
+            <div class="card music-player animate__animated animate__fadeInRight animate__delay-1s">
+                <h3><i class="fas fa-music"></i> پخش کننده موسیقی</h3>
+                <div class="music-info">
+                    <div class="music-title" id="musicTitle">آینه</div>
+                    <div class="music-artist" id="musicArtist">خواننده ناشناس</div>
+                </div>
+                <div class="progress-container" id="progressContainer">
+                    <div class="progress-bar" id="progressBar"></div>
+                </div>
+                <div class="music-controls">
+                    <button class="music-btn" onclick="skipBackward()">
+                        <i class="fas fa-step-backward"></i>
+                    </button>
+                    <button class="music-btn play-btn" id="playButton" onclick="togglePlay()">
+                        <i class="fas fa-play" id="playIcon"></i>
+                    </button>
+                    <button class="music-btn" onclick="skipForward()">
+                        <i class="fas fa-step-forward"></i>
+                    </button>
+                </div>
+                <div style="margin-top: 1rem; display: flex; justify-content: space-between;">
+                    <span id="currentTime">0:00</span>
+                    <span id="duration">0:00</span>
+                </div>
+            </div>
+            
+            <!-- لینک‌های سریع -->
+            <div class="card animate__animated animate__fadeInRight animate__delay-2s">
+                <h3><i class="fas fa-link"></i> لینک‌های سریع</h3>
+                <div class="quick-links">
+                    <a href="https://www.google.com" target="_blank" class="quick-link">
+                        <i class="fas fa-search"></i> گوگل
+                    </a>
+                    <a href="https://www.youtube.com" target="_blank" class="quick-link">
+                        <i class="fab fa-youtube"></i> یوتیوب
+                    </a>
+                    <a href="https://translate.google.com" target="_blank" class="quick-link">
+                        <i class="fas fa-language"></i> مترجم گوگل
+                    </a>
+                    <a href="https://drive.google.com" target="_blank" class="quick-link">
+                        <i class="fab fa-google-drive"></i> گوگل درایف
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- فوتر -->
+    <footer class="animate__animated animate__fadeInUp">
+        <p>©2025 self updating| تمامی حقوق محفوظ است</p>
+        <p>توسعه فردی و پیشرفت</p>
+    </footer>
+    
+    <!-- موزیک پلیر -->
+    <audio id="music" loop>
+        <source src="assets/ayeene.mp3" type="audio/mpeg">
+        مرورگر شما از پخش صدا پشتیبانی نمی‌کند
+    </audio>
+    
+    <!-- اسکریپت‌های جاوااسکریپت -->
+    <script>
+        
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('success') === 'true') {
+    alert("ورود شما موفقیت‌آمیز بود!");
+  }
+
+
+        // کنترل پخش موسیقی
+        const music = document.getElementById('music');
+        const playButton = document.getElementById('playButton');
+        const playIcon = document.getElementById('playIcon');
+        const progressBar = document.getElementById('progressBar');
+        const progressContainer = document.getElementById('progressContainer');
+        const currentTimeEl = document.getElementById('currentTime');
+        const durationEl = document.getElementById('duration');
+        
+        // آهنگ‌های موجود در پخش کننده
+        const playlist = [
+            {
+                title: "آینه",
+                artist: "خواننده ناشناس",
+                src: "assets/ayeene.mp3"
+            },
+            {
+                title: " نفسم گرف از این شهر",
+                artist: "حبیب",
+                src: "assets/habib_nafas 128.mp3"
+            },
+            {
+                title: " سفر کردم...",
+                artist: " معین_ریمیکس",
+                src: "assets/moein remix.mp3"
+            },
+            {
+                title: " سفر کردم...",
+                artist: " معین_ریمیکس",
+                src: "assets/moein remix.mp3"
+            },
+            {
+                title: " سفر کردم...",
+                artist: " معین",
+                src: "assets/05 Saffar.mp3"
+            },
+            {
+                title: "یادگاری",
+                artist: "سیاوش قمیشی",
+                src: "assets/01 Yadegari.mp3"
+            },
+            {
+                title: " قصه عشق",
+                artist: " ابی",
+                src: "assets/Ebi - Gheseye Eshgh - Remix - Mp3 Master.mp3"
+            },
+            {
+                title: " دل دیوونه",
+                artist: " هایده",
+                src: "assets/Hayedeh Dele Divoone - MMV Remix (1).mp3"
+            },
+            {
+                title: " یه روز خوب میاد",
+                artist: "هیچکس ",
+                src: "assets/Hichkas - Ye Rooze Khoob Miad 128.mp3"
+            },
+            {
+                title: "شفا",
+                artist: "رضا پیشرو",
+                src: "assets/Reza Pishro - Shafa.mp3"
+            },
+            
+        ];
+        
+        let currentSongIndex = 0;
+        
+        // بارگذاری آهنگ
+        function loadSong(song) {
+            music.src = song.src;
+            document.getElementById('musicTitle').textContent = song.title;
+            document.getElementById('musicArtist').textContent = song.artist;
+        }
+        
+        // پخش یا توقف موسیقی
+        function togglePlay() {
+            if (music.paused) {
+                music.play();
+                playIcon.classList.remove('fa-play');
+                playIcon.classList.add('fa-pause');
+            } else {
+                music.pause();
+                playIcon.classList.remove('fa-pause');
+                playIcon.classList.add('fa-play');
+            }
+        }
+        
+        // تغییر آهنگ
+        function skipForward() {
+            currentSongIndex = (currentSongIndex + 1) % playlist.length;
+            loadSong(playlist[currentSongIndex]);
+            if (!music.paused) music.play();
+        }
+        
+        function skipBackward() {
+            currentSongIndex = (currentSongIndex - 1 + playlist.length) % playlist.length;
+            loadSong(playlist[currentSongIndex]);
+            if (!music.paused) music.play();
+        }
+        
+        // به‌روزرسانی نوار پیشرفت
+        function updateProgress(e) {
+            const { duration, currentTime } = e.srcElement;
+            const progressPercent = (currentTime / duration) * 100;
+            progressBar.style.width = `${progressPercent}%`;
+            
+            // مدت زمان کل
+            const durationMinutes = Math.floor(duration / 60);
+            let durationSeconds = Math.floor(duration % 60);
+            if (durationSeconds < 10) durationSeconds = `0${durationSeconds}`;
+            if (durationSeconds) durationEl.textContent = `${durationMinutes}:${durationSeconds}`;
+            
+            // زمان فعلی
+            const currentMinutes = Math.floor(currentTime / 60);
+            let currentSeconds = Math.floor(currentTime % 60);
+            if (currentSeconds < 10) currentSeconds = `0${currentSeconds}`;
+            currentTimeEl.textContent = `${currentMinutes}:${currentSeconds}`;
+        }
+        
+        // تنظیم زمان آهنگ با کلیک روی نوار پیشرفت
+        function setProgress(e) {
+            const width = this.clientWidth;
+            const clickX = e.offsetX;
+            const duration = music.duration;
+            music.currentTime = (clickX / width) * duration;
+        }
+        
+        // رویدادهای موسیقی
+        music.addEventListener('timeupdate', updateProgress);
+        music.addEventListener('ended', skipForward);
+        progressContainer.addEventListener('click', setProgress);
+        
+        // بارگذاری اولین آهنگ
+        loadSong(playlist[currentSongIndex]);
+        
+        // نمایش ساعت و تاریخ
+        function updateClock() {
+            const now = new Date();
+            const time = now.toLocaleTimeString('fa-IR');
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const date = now.toLocaleDateString('fa-IR', options);
+            
+            document.getElementById('time').textContent = time;
+            document.getElementById('date').textContent = date;
+        }
+        
+        // به روز رسانی ساعت هر ثانیه
+        updateClock();
+        setInterval(updateClock, 1000);
+        
+        // لیست جملات انگیزشی
+        const motivationalQuotes = [
+            {
+                quote: "موفقیت مسیری است نه مقصد. مهم این است که در حال پیشرفت باشید.",
+                author: "بروس لی"
+            },
+            {
+                quote: "تنها راه انجام کارهای بزرگ، دوست داشتن کاری است که انجام می‌دهید.",
+                author: "استیو جابز"
+            },
+            {
+                quote: "اگر می‌توانید آن را تصور کنید، می‌توانید به آن دست یابید. اگر می‌توانید آن را رویا ببینید، می‌توانید آن را انجام دهید.",
+                author: "والت دیزنی"
+            },
+            {
+                quote: "شکست راهی برای شروع دوباره است، این بار هوشمندانه‌تر.",
+                author: "هنری فورد"
+            },
+            {
+                quote: "من از فردا شروع می‌کنم، این خطرناک‌ترین جمله است.",
+                author: "پابلو پیکاسو"
+            },
+            {
+                quote: "اگر برای چیزی به اندازه کافی تلاش کنید، حتماً به آن می‌رسید.",
+                author: "مایکل جردن"
+            },
+            {
+                quote: "تنها محدودیت‌هایی که داریم، آنهایی هستند که برای خودمان می‌سازیم.",
+                author: "ناپلئون هیل"
+            },
+            {
+                quote: "بهترین انتقام، موفقیت بزرگ است.",
+                author: "فرانک سیناترا"
+            },
+            {
+                quote: "رمز موفقیت شروع کردن است.",
+                author: "مارک تواین"
+            },
+            {
+                quote: "اگر نمی‌توانید کارهای بزرگ انجام دهید، کارهای کوچک را به روشی بزرگ انجام دهید.",
+                author: "ناپلئون هیل"
+            },
+            {
+                quote: "درد یا لذت کاری که انجام میدی نمی مونه اما افتخار یا شرمندگیش چرا",
+                author: "پارسا ویتو"
+            },
+            {
+                quote: "مهمترین عضو بدن برای موفقیت باسن تنگ است",
+                author: "ناشناس"
+            }
+    
+    
+        ];
+        
+        // نمایش جمله انگیزشی جدید
+        function newQuote() {
+            const randomIndex = Math.floor(Math.random() * motivationalQuotes.length);
+            const randomQuote = motivationalQuotes[randomIndex];
+            
+            document.getElementById('motivationQuote').textContent = randomQuote.quote;
+            document.getElementById('motivationAuthor').textContent = `- ${randomQuote.author}`;
+            
+            // انیمیشن برای تغییر جمله
+            const quoteElement = document.getElementById('motivationQuote');
+            quoteElement.classList.add('animate__animated', 'animate__fadeIn');
+            setTimeout(() => {
+                quoteElement.classList.remove('animate__animated', 'animate__fadeIn');
+            }, 1000);
+        }
+        
+        // توابع ماشین حساب جدید
+        let currentCalcInput = '0';
+        let previousCalcInput = '';
+        let calcOperation = null;
+        let resetCalcInput = false;
+
+        function updateCalcDisplay() {
+            document.getElementById('calc-display').value = currentCalcInput;
+        }
+
+        function appendNumber(number) {
+            if (currentCalcInput === '0' || resetCalcInput) {
+                currentCalcInput = number;
+                resetCalcInput = false;
+            } else {
+                currentCalcInput += number;
+            }
+            updateCalcDisplay();
+        }
+
+        function appendDecimal() {
+            if (resetCalcInput) {
+                currentCalcInput = '0.';
+                resetCalcInput = false;
+            } else if (!currentCalcInput.includes('.')) {
+                currentCalcInput += '.';
+            }
+            updateCalcDisplay();
+        }
+
+        function clearCalc() {
+            currentCalcInput = '0';
+            previousCalcInput = '';
+            calcOperation = null;
+            updateCalcDisplay();
+        }
+
+        function toggleSign() {
+            currentCalcInput = (parseFloat(currentCalcInput) * -1).toString();
+            updateCalcDisplay();
+        }
+
+        function calcPercentage() {
+            currentCalcInput = (parseFloat(currentCalcInput) / 100).toString();
+            updateCalcDisplay();
+        }
+
+        function appendOperator(op) {
+            if (calcOperation !== null) calculate();
+            previousCalcInput = currentCalcInput;
+            calcOperation = op;
+            resetCalcInput = true;
+        }
+
+        function calculate() {
+            if (calcOperation === null || resetCalcInput) return;
+            
+            let result;
+            const prev = parseFloat(previousCalcInput);
+            const current = parseFloat(currentCalcInput);
+            
+            switch (calcOperation) {
+                case '+':
+                    result = prev + current;
+                    break;
+                case '-':
+                    result = prev - current;
+                    break;
+                case '*':
+                    result = prev * current;
+                    break;
+                case '/':
+                    result = prev / current;
+                    break;
+                default:
+                    return;
+            }
+            
+            currentCalcInput = result.toString();
+            calcOperation = null;
+            resetCalcInput = true;
+            updateCalcDisplay();
+        }
+
+        // پشتیبانی از صفحه کلید برای ماشین حساب
+        document.addEventListener('keydown', function(event) {
+            if (event.key >= '0' && event.key <= '9') {
+                appendNumber(event.key);
+            } else if (event.key === '.') {
+                appendDecimal();
+            } else if (event.key === '+' || event.key === '-' || event.key === '*' || event.key === '/') {
+                appendOperator(event.key);
+            } else if (event.key === 'Enter' || event.key === '=') {
+                calculate();
+            } else if (event.key === 'Escape') {
+                clearCalc();
+            } else if (event.key === '%') {
+                calcPercentage();
+            } else if (event.key === 'Backspace') {
+                currentCalcInput = currentCalcInput.slice(0, -1);
+                if (currentCalcInput === '') currentCalcInput = '0';
+                updateCalcDisplay();
+            }
+        });
+        
+        // تغییر تم
+        const themeSwitcher = document.getElementById('themeSwitcher');
+        
+        themeSwitcher.addEventListener('click', () => {
+            document.body.classList.toggle('light-mode');
+            
+            if (document.body.classList.contains('light-mode')) {
+                themeSwitcher.innerHTML = '<i class="fas fa-sun"></i>';
+                localStorage.setItem('theme', 'light');
+            } else {
+                themeSwitcher.innerHTML = '<i class="fas fa-moon"></i>';
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+        
+        // بررسی تم ذخیره شده
+        if (localStorage.getItem('theme') === 'light') {
+            document.body.classList.add('light-mode');
+            themeSwitcher.innerHTML = '<i class="fas fa-sun"></i>';
+        }
+        
+        // نمایش نوتیفیکیشن
+        function showToast(message) {
+            const toast = document.createElement('div');
+            toast.className = 'animate__animated animate__fadeInUp';
+            toast.style.position = 'fixed';
+            toast.style.bottom = '20px';
+            toast.style.left = '50%';
+            toast.style.transform = 'translateX(-50%)';
+            toast.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+            toast.style.color = 'white';
+            toast.style.padding = '10px 20px';
+            toast.style.borderRadius = '5px';
+            toast.style.zIndex = '1000';
+            toast.textContent = message;
+            
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.classList.remove('animate__fadeInUp');
+                toast.classList.add('animate__fadeOutDown');
+                setTimeout(() => {
+                    document.body.removeChild(toast);
+                }, 500);
+            }, 3000);
+        }
+        
+        // مدیریت لینک‌های سفارشی
+        // نمایش مدال مدیریت لینک‌ها
+        document.getElementById('manageLinksBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            showLinksModal();
+        });
+
+        // تابع نمایش مدال مدیریت لینک‌ها
+        function showLinksModal() {
+            const modal = document.createElement('div');
+            modal.className = 'modal';
+            modal.id = 'linksModal';
+            modal.innerHTML = `
+                <div class="modal-content animate__animated animate__fadeInDown">
+                    <span class="close-modal">&times;</span>
+                    <h3><i class="fas fa-link"></i> مدیریت لینک‌های سفارشی</h3>
+                    <div class="link-list" id="customLinksList"></div>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+            
+            // بستن مدال با کلیک روی ×
+            modal.querySelector('.close-modal').addEventListener('click', function() {
+                closeModal();
+            });
+            
+            // بستن مدال با کلیک خارج از آن
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+            
+            // بارگذاری لیست لینک‌ها
+            loadLinksList();
+        }
+
+        // تابع بستن مدال
+        function closeModal() {
+            const modal = document.getElementById('linksModal');
+            modal.querySelector('.modal-content').classList.add('animate__fadeOutUp');
+            setTimeout(() => {
+                modal.remove();
+            }, 500);
+        }
+
+        // تابع بارگذاری لیست لینک‌ها در مدال
+        function loadLinksList() {
+            const customLinks = JSON.parse(localStorage.getItem('customLinks') || '[]');
+            const linksList = document.getElementById('customLinksList');
+            linksList.innerHTML = '';
+            
+            if (customLinks.length === 0) {
+                linksList.innerHTML = '<p>هنوز هیچ لینک سفارشی اضافه نشده است.</p>';
+                return;
+            }
+            
+            customLinks.forEach((link, index) => {
+                const linkItem = document.createElement('div');
+                linkItem.className = 'link-item';
+                linkItem.innerHTML = `
+                    <div class="link-info">
+                        <i class="fas ${link.icon}"></i>
+                        <span>${link.name}</span>
+                        <small>${link.url}</small>
+                    </div>
+                    <div class="link-actions">
+                        <button class="action-btn edit-btn" data-index="${index}">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="action-btn delete-btn" data-index="${index}">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                `;
+                linksList.appendChild(linkItem);
+            });
+            
+            // اضافه کردن رویداد برای دکمه‌های ویرایش
+            document.querySelectorAll('.edit-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    editLink(parseInt(this.getAttribute('data-index')));
+                });
+            });
+            
+            // اضافه کردن رویداد برای دکمه‌های حذف
+            document.querySelectorAll('.delete-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    deleteLink(parseInt(this.getAttribute('data-index')));
+                });
+            });
+        }
+
+        // تابع ویرایش لینک
+        function editLink(index) {
+            const customLinks = JSON.parse(localStorage.getItem('customLinks') || '[]');
+            const link = customLinks[index];
+            
+            const newName = prompt('عنوان جدید لینک:', link.name);
+            if (!newName) return;
+            
+            const newUrl = prompt('آدرس جدید لینک:', link.url);
+            if (!newUrl) return;
+            
+            const newIcon = prompt('آیکون جدید لینک (از FontAwesome):', link.icon);
+            
+            customLinks[index] = {
+                name: newName,
+                url: newUrl,
+                icon: newIcon
+            };
+            
+            localStorage.setItem('customLinks', JSON.stringify(customLinks));
+            showToast('لینک با موفقیت ویرایش شد!');
+            loadLinksList();
+            refreshLinksInUI();
+        }
+
+        // تابع حذف لینک
+        function deleteLink(index) {
+            if (confirm('آیا از حذف این لینک مطمئن هستید؟')) {
+                const customLinks = JSON.parse(localStorage.getItem('customLinks') || '[]');
+                customLinks.splice(index, 1);
+                localStorage.setItem('customLinks', JSON.stringify(customLinks));
+                showToast('لینک با موفقیت حذف شد!');
+                loadLinksList();
+                refreshLinksInUI();
+            }
+        }
+
+        // تابع به‌روزرسانی لینک‌ها در رابط کاربری
+        function refreshLinksInUI() {
+            const buttonsGrid = document.querySelector('.buttons-grid');
+            // حذف همه لینک‌های سفارشی موجود
+            document.querySelectorAll('.buttons-grid a[id^="customLink-"]').forEach(link => {
+                link.remove();
+            });
+            // بارگذاری مجدد لینک‌ها
+            loadCustomLinks();
+        }
+
+        // افزودن لینک جدید
+        document.getElementById('addLinkBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const linkName = prompt('عنوان لینک را وارد کنید:');
+            if (!linkName) return;
+            
+            const linkUrl = prompt('آدرس لینک را وارد کنید:');
+            if (!linkUrl) return;
+            
+            const linkIcon = prompt('آیکون لینک را انتخاب کنید (از FontAwesome):', 'fa-link');
+            
+            // ذخیره در localStorage
+            const customLinks = JSON.parse(localStorage.getItem('customLinks') || '[]');
+            customLinks.push({
+                name: linkName,
+                url: linkUrl,
+                icon: linkIcon
+            });
+            localStorage.setItem('customLinks', JSON.stringify(customLinks));
+            
+            // نمایش لینک جدید
+            refreshLinksInUI();
+            showToast('لینک جدید با موفقیت اضافه شد!');
+        });
+
+        // بارگذاری لینک‌های سفارشی
+        function loadCustomLinks() {
+            const customLinks = JSON.parse(localStorage.getItem('customLinks') || []);
+            const buttonsGrid = document.querySelector('.buttons-grid');
+            
+            customLinks.forEach((link, index) => {
+                const newButton = document.createElement('a');
+                newButton.href = link.url;
+                newButton.target = '_blank';
+                newButton.className = 'main-button animate__animated animate__fadeIn animate__delay-3s';
+                newButton.id = `customLink-${index}`;
+                newButton.innerHTML = `<i class="fas ${link.icon}"></i> ${link.name}`;
+                buttonsGrid.appendChild(newButton);
+            });
+        }
+        
+        // توابع مدیریت چک لیست
+        function loadTasks() {
+            const tasks = JSON.parse(localStorage.getItem('tasks') || []);
+            const container = document.getElementById('tasksContainer');
+            container.innerHTML = '';
+            
+            tasks.forEach((task, index) => {
+                const taskElement = document.createElement('div');
+                taskElement.className = 'task-item';
+                taskElement.innerHTML = `
+                    <input type="checkbox" class="task-checkbox" ${task.completed ? 'checked' : ''} 
+                        onchange="toggleTask(${index})">
+                    <span class="task-text ${task.completed ? 'task-completed' : ''}">${task.text}</span>
+                    <button class="delete-task" onclick="deleteTask(${index})">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                `;
+                container.appendChild(taskElement);
+            });
+        }
+        // مدیریت اطلاعات کاربر
+function getUserInfo() {
+    return JSON.parse(localStorage.getItem('userInfo')) || null;
+}
+
+function setUserInfo(info) {
+    localStorage.setItem('userInfo', JSON.stringify(info));
+    updateWelcomeMessage();
+}
+
+function updateWelcomeMessage() {
+    const userInfo = getUserInfo();
+    const welcomeElement = document.getElementById('welcomeMessage');
+    
+    if (userInfo) {
+        welcomeElement.textContent = `درود بر تو ${userInfo.firstName}، به پنل کاربری خودت خوش آمدی`;
+    } else {
+        welcomeElement.textContent = 'پنل توسعه فردی';
+    }
+}
+
+function showUserModal() {
+    const modal = document.getElementById('userModal');
+    const userInfo = getUserInfo();
+    
+    if (userInfo) {
+        document.getElementById('userFirstName').value = userInfo.firstName;
+        document.getElementById('userLastName').value = userInfo.lastName;
+        document.getElementById('userAge').value = userInfo.age || '';
+        document.getElementById('userJob').value = userInfo.job || '';
+    } else {
+        document.getElementById('userForm').reset();
+    }
+    
+    modal.style.display = 'block';
+}
+
+function closeUserModal() {
+    document.getElementById('userModal').style.display = 'none';
+}
+
+function saveUserInfo(e) {
+    e.preventDefault();
+    
+    const userInfo = {
+        firstName: document.getElementById('userFirstName').value.trim(),
+        lastName: document.getElementById('userLastName').value.trim(),
+        age: document.getElementById('userAge').value,
+        job: document.getElementById('userJob').value.trim()
+    };
+    
+    setUserInfo(userInfo);
+    closeUserModal();
+    showToast('اطلاعات کاربری با موفقیت ذخیره شد!');
+}
+
+// در اولین ورود، اطلاعات کاربر را دریافت می‌کنیم
+function checkFirstVisit() {
+    const userInfo = getUserInfo();
+    
+    if (!userInfo) {
+        setTimeout(() => {
+            const firstName = prompt('سلام! لطفاً نام خود را وارد کنید:');
+            if (firstName) {
+                setUserInfo({
+                    firstName: firstName,
+                    lastName: '',
+                    age: '',
+                    job: ''
+                });
+                showToast(`سلام ${firstName}! به پنل توسعه فردی خوش آمدید.`);
+            }
+        }, 1000);
+    } else {
+        showToast(`درود بر تو ${userInfo.firstName}، به پنل کاربری خودت خوش آمدی`);
+    }
+}
+
+// رویدادهای مربوط به کاربر
+document.getElementById('userAvatar').addEventListener('click', showUserModal);
+document.getElementById('userForm').addEventListener('submit', saveUserInfo);
+
+window.addEventListener('DOMContentLoaded', function() {
+    updateWelcomeMessage();
+    checkFirstVisit();
+    loadTasks();
+    newQuote();
+    loadCustomLinks();
+
+    document.getElementById('newTaskInput').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            addTask();
+        }
+    });
+});
+        
+        // پیام کتابخانه دهم
+        document.getElementById('kotob10Btn').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('بخش کتابخانه دهم در حال به‌روزرسانی است. به زودی در دسترس خواهد بود.');
+        });
+        
+        // هشدار ماشین حساب
+        if (!localStorage.getItem('calcWarningShown')) {
+            alert('توجه: ماشین حساب فقط برای محاسبات ساده طراحی شده است. لطفاً برای حل تمرینات از آن استفاده نکنید.');
+            localStorage.setItem('calcWarningShown', 'true');
+        }
+        
+      
+
+        
+    </script>
+    <!-- مدال اطلاعات کاربر -->
+<div class="user-modal" id="userModal">
+    <div class="user-modal-content animate__animated animate__fadeInDown">
+        <h3><i class="fas fa-user-edit"></i> اطلاعات کاربری</h3>
+        <form id="userForm">
+            <div class="user-form-group">
+                <label for="userFirstName">نام:</label>
+                <input type="text" id="userFirstName" required>
+            </div>
+            <div class="user-form-group">
+                <label for="userLastName">نام خانوادگی:</label>
+                <input type="text" id="userLastName" required>
+            </div>
+            <div class="user-form-group">
+                <label for="userAge">سن:</label>
+                <input type="number" id="userAge" min="1" max="120">
+            </div>
+            <div class="user-form-group">
+                <label for="userJob">شغل:</label>
+                <input type="text" id="userJob">
+            </div>
+            <div class="user-form-actions">
+                <button type="button" class="cancel-btn" onclick="closeUserModal()">
+                    <i class="fas fa-times"></i> انصراف
+                </button>
+                <button type="submit" class="save-btn">
+                    <i class="fas fa-save"></i> ذخیره
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,132 @@
+:root {
+    --primary-color: #3a506b; /* آبی تیره ملایم */
+    --secondary-color: #5bc0be; /* سبز آبی روشن */
+    --accent-color: #9c89b8; /* بنفش ملایم */
+    --dark-color: #1c2541; /* آبی بسیار تیره */
+    --light-color: #f8f9fa; /* سفید بسیار روشن */
+    --text-color: #333;
+    --text-light: #fff;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+}
+
+/* استایل آواتار کاربر */
+.user-avatar {
+    font-size: 2.5rem;
+    cursor: pointer;
+    transition: var(--transition);
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.user-avatar:hover {
+    transform: scale(1.1);
+    color: var(--secondary-color);
+}
+
+/* مدال اطلاعات کاربر */
+.user-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(26, 39, 62, 0.7); /* آبی تیره با شفافیت */
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+}
+
+.user-modal-content {
+    background-color: rgba(28, 37, 65, 0.9); /* آبی بسیار تیره */
+    margin: 10% auto;
+    padding: 2rem;
+    border-radius: 15px;
+    max-width: 400px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(91, 192, 190, 0.3); /* حاشیه سبز آبی */
+}
+
+.user-form-group {
+    margin-bottom: 1rem;
+}
+
+.user-form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--secondary-color);
+}
+
+.user-form-group input {
+    width: 100%;
+    padding: 0.8rem;
+    border-radius: 8px;
+    border: 1px solid rgba(91, 192, 190, 0.3); /* سبز آبی */
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-family: Vazir, Arial, sans-serif;
+    transition: var(--transition);
+}
+
+.user-form-group input:focus {
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 2px rgba(91, 192, 190, 0.3);
+}
+
+.user-form-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+}
+
+.user-form-actions button {
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: var(--transition);
+    font-family: Vazir, Arial, sans-serif;
+    font-weight: bold;
+}
+
+.save-btn {
+    background-color: var(--accent-color); /* بنفش */
+    color: white;
+}
+
+.save-btn:hover {
+    background-color: #8a74a8; /* بنفش تیره‌تر */
+}
+
+.cancel-btn {
+    background-color: #e76f51; /* نارنجی مایل به قرمز */
+    color: white;
+}
+
+.cancel-btn:hover {
+    background-color: #d45d3f; /* نارنجی تیره‌تر */
+}
+
+/* حالت روشن برای مدال کاربر */
+body.light-mode .user-modal {
+    background-color: rgba(210, 218, 226, 0.7); /* آبی بسیار روشن */
+}
+
+body.light-mode .user-modal-content {
+    background-color: rgba(248, 249, 250, 0.95); /* سفید بسیار روشن */
+    border: 1px solid rgba(156, 137, 184, 0.3); /* بنفش ملایم */
+}
+
+body.light-mode .user-form-group label {
+    color: var(--primary-color);
+}
+
+body.light-mode .user-form-group input {
+    background-color: rgba(255, 255, 255, 0.9);
+    color: var(--text-color);
+    border-color: rgba(58, 80, 107, 0.2); /* آبی تیره ملایم */
+}
+
+body.light-mode .user-form-group input:focus {
+    border-color: var(--accent-color); /* بنفش */
+    box-shadow: 0 0 0 2px rgba(156, 137, 184, 0.2);
+}
