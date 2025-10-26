@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>کتابخانه دیجیتال پایه دهم | دبیرستان البرز</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3a0ca3;
+            --dark-color: #14213d;
+            --light-color: #f8f9fa;
+            --accent-color: #4cc9f0;
+            --card-bg: rgba(255, 255, 255, 0.08);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Vazirmatn', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0a2647, #14213d);
+            color: var(--light-color);
+            min-height: 100vh;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        .logo {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(45deg, var(--accent-color), var(--primary-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(76, 201, 240, 0.3);
+        }
+        
+        .logo i {
+            font-size: 2.5rem;
+            color: white;
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, #4cc9f0, #4361ee);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .search-box {
+            max-width: 600px;
+            margin: 2rem auto;
+            position: relative;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            border: none;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            color: white;
+            font-size: 1rem;
+            padding-right: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .search-box i {
+            position: absolute;
+            left: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .book-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .book-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.12);
+        }
+        
+        .book-cover {
+            width: 100%;
+            height: 180px;
+            background: linear-gradient(45deg, rgba(67, 97, 238, 0.1), rgba(76, 201, 240, 0.1));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+        
+        .book-cover i {
+            font-size: 3.5rem;
+            color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .book-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            flex-grow: 1;
+        }
+        
+        .book-publisher {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 1.5rem;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+            width: 100%;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(67, 97, 238, 0.4);
+        }
+        
+        .btn i {
+            margin-left: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 0.5rem;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .books-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-book-open"></i>
+            </div>
+            <h1>کتابخانه دیجیتال پایه دهم</h1>
+            <p class="subtitle">منابع آموزشی و کمک‌درسی رشته ریاضی فیزیک</p>
+            
+            <div class="search-box">
+                <input type="text" placeholder="جستجو در کتاب‌ها...">
+                <i class="fas fa-search"></i>
+            </div>
+        </header>
+        
+        <div class="books-grid">
+            <div class="book-card">
+                <div class="book-cover">
+                    <i class="fas fa-atom"></i>
+                </div>
+                <h3 class="book-title">نردبام فیزیک دهم</h3>
+                <p class="book-publisher">انتشارات خیلی سبز</p>
+                <button onclick="window.location.href='file:///D:/kotob%2010/kotob%20test/%D9%81%DB%8C%D8%B2%DB%8C%DA%A9%20%D8%AF%D9%87%D9%85%20%D9%86%D8%B1%D8%AF%D8%A8%D8%A7%D9%85.pdf'" class="btn">
+                    مشاهده کتاب <i class="fas fa-external-link-alt"></i>
+                </button>
+            </div>
+            
+            <div class="book-card">
+                <div class="book-cover">
+                    <i class="fas fa-square-root-alt"></i>
+                </div>
+                <h3 class="book-title">پاورتست ریاضی دهم</h3>
+                <p class="book-publisher">انتشارات مهروماه</p>
+                <button onclick="window.location.href='file:///D:/kotob%2010/kotob%20test/Power%20test%20riazi.pdf'" class="btn">
+                    مشاهده کتاب <i class="fas fa-external-link-alt"></i>
+                </button>
+            </div>
+            
+            <div class="book-card">
+                <div class="book-cover">
+                    <i class="fas fa-flask"></i>
+                </div>
+                <h3 class="book-title">شیمی دهم مبتکران</h3>
+                <p class="book-publisher">انتشارات مبتکران</p>
+                <button onclick="window.location.href='file:///D:/kotob%2010/kotob%20test/%D8%B4%DB%8C%D9%85%DB%8C%20%D8%AF%D9%87%D9%85%20%D8%A8%D8%A7%D8%B2%D8%B1%DA%AF%D8%A7%D9%86.pdf'" class="btn">
+                    مشاهده کتاب <i class="fas fa-external-link-alt"></i>
+                </button>
+            </div>
+            
+            <div class="book-card">
+                <div class="book-cover">
+                    <i class="fas fa-shapes"></i>
+                </div>
+                <h3 class="book-title">هندسه جامع کنکور</h3>
+                <p class="book-publisher">انتشارات خیلی سبز</p>
+                <button onclick="window.location.href='file:///D:/kotob%2010/kotob%20test/@ketab_nub%20-(%20%D9%87%D9%86%D8%AF%D8%B3%D9%87%20%D8%AE%DB%8C%D9%84%DB%8C%20%D8%B3%D8%A8%D8%B2%20).pdf'" class="btn">
+                    مشاهده کتاب <i class="fas fa-external-link-alt"></i>
+                </button>
+            </div>
+            
+            <div class="book-card">
+                <div class="book-cover">
+                    <i class="fas fa-calculator"></i>
+                </div>
+                <h3 class="book-title">ریاضی دهم نشر الگو</h3>
+                <p class="book-publisher">انتشارات الگو</p>
+                <button onclick="window.location.href='file:///D:/kotob%2010/kotob%20test/%D8%B1%DB%8C%D8%A7%D8%B6%DB%8C%20%D8%AF%D9%87%D9%85%20%D8%A7%D9%84%DA%AF%D9%88%20.pdf'" class="btn">
+                    مشاهده کتاب <i class="fas fa-external-link-alt"></i>
+                </button>
+            </div>
+        </div>
+        
+        <footer>
+            <p>© 2023 کتابخانه دیجیتال دبیرستان البرز</p>
+            <p>تمامی حقوق برای ناشران محفوظ است</p>
+        </footer>
+    </div>
+
+    <script>
+        // جستجوی کتاب‌ها
+        const searchInput = document.querySelector('.search-box input');
+        const bookCards = document.querySelectorAll('.book-card');
+        
+        searchInput.addEventListener('input', () => {
+            const searchTerm = searchInput.value.toLowerCase();
+            
+            bookCards.forEach(card => {
+                const title = card.querySelector('.book-title').textContent.toLowerCase();
+                const publisher = card.querySelector('.book-publisher').textContent.toLowerCase();
+                
+                if (title.includes(searchTerm) || publisher.includes(searchTerm)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سامانه کلاس های آنلاین | دبیرستان البرز</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3f37c9;
+            --dark-color: #1b263b;
+            --light-color: #f8f9fa;
+            --accent-color: #4cc9f0;
+            --success-color: #4ad66d;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Vazirmatn', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1b263b, #415a77);
+            color: var(--light-color);
+            min-height: 100vh;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: fadeIn 1s ease-in-out;
+        }
+        
+        .logo {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 1rem;
+            background-color: var(--accent-color);
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(76, 201, 240, 0.3);
+        }
+        
+        .logo i {
+            font-size: 2.5rem;
+            color: var(--dark-color);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #4cc9f0, #4361ee);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .class-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .class-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+        }
+        
+        .class-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .class-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent-color);
+        }
+        
+        .class-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            margin-top: 1.5rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(67, 97, 238, 0.4);
+        }
+        
+        .btn i {
+            margin-left: 0.5rem;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .class-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-chalkboard-teacher"></i>
+            </div>
+            <h1>سامانه کلاس های آنلاین</h1>
+            <p class="subtitle"> برای ورود به کلاس مورد نظر روی دکمه مربوطه کلیک کنید.</p>
+        </header>
+        
+        <div class="class-grid">
+            <div class="class-card">
+                <div class="class-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3 class="class-title">کلاس 204</h3>
+                <p>کلاس اختصاصی پایه یازدهم - رشته ریاضی فیزیک</p>
+                <a href="https://www.skyroom.online/ch/alborz2/r204" class="btn">
+                    ورود به کلاس <i class="fas fa-arrow-left"></i>
+                </a>
+            </div>
+            
+            <div class="class-card">
+                <div class="class-icon">
+                    <i class="fas fa-user-graduate"></i>
+                </div>
+                <h3 class="class-title">کلاس تجمیعی یازدهم</h3>
+                <p>کلاس عمومی تمامی رشته های پایه یازدهم</p>
+                <a href="https://www.skyroom.online/ch/alborz2/s11" class="btn">
+                    ورود به کلاس <i class="fas fa-arrow-left"></i>
+                </a>
+            </div>
+            
+            <div class="class-card">
+                <div class="class-icon">
+                    <i class="fas fa-square-root-alt"></i>
+                </div>
+                <h3 class="class-title">کلاس تجمیعی یازدهم ریاضی</h3>
+                <p>کلاس تخصصی رشته ریاضی فیزیک</p>
+                <a href="https://www.skyroom.online/ch/alborz2/r11" class="btn">
+                    ورود به کلاس <i class="fas fa-arrow-left"></i>
+                </a>
+            </div>
+            
+            <div class="class-card">
+                <div class="class-icon">
+                    <i class="fas fa-comments"></i>
+                </div>
+                <h3 class="class-title">پیامرسان بله</h3>
+                <p>ارتباط با معلمان و پشتیبانی آموزشی</p>
+                <a href="https://web.bale.ai/chat" class="btn">
+                    ورود به بله <i class="fas fa-arrow-left"></i>
+                </a>
+            </div>
+        </div>
+        
+        <footer>
+            <p>© 2025 دبیرستان البرز پایه دهم | تمامی حقوق محفوظ است</p>
+            <p>دبیرستان ماندگار البرز پایه دهم</p>
+        </footer>
+    </div>
+</body>
+</html>

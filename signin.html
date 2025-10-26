@@ -1,0 +1,110 @@
+<!-- From Uiverse.io by JohnnyCSilva --> 
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+<meta charset="utf-8"/>
+<title>ورود</title>
+<style>
+ /* From Uiverse.io by JohnnyCSilva */ 
+ .form { display: flex; flex-direction: column; gap: 10px; background-color: #ffffff; padding: 30px; padding-left: 33%; width: 450px; border-radius: 20px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; } 
+ ::placeholder { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; } 
+ .form button { align-self: flex-end; }
+  .flex-column > label { color: #151717; font-weight: 600; } 
+  .inputForm { border: 1.5px solid #ecedec; border-radius: 10px; height: 50px; display: flex; align-items: center; padding-left: 10px; transition: 0.2s ease-in-out; } 
+  .input { margin-left: 10px; border-radius: 10px; border: none; width: 100%; height: 100%; } .input:focus { outline: none; } .inputForm:focus-within { border: 1.5px solid #2d79f3; } .flex-row { display: flex; flex-direction: row; align-items: center; gap: 10px; justify-content: space-between; } .flex-row > div > label { font-size: 14px; color: black; font-weight: 400; } .span { font-size: 14px; margin-left: 5px; color: #2d79f3; font-weight: 500; cursor: pointer; } .button-submit { margin: 20px 0 10px 0; background-color: #151717; border: none; color: white; font-size: 15px; font-weight: 500; border-radius: 10px; height: 50px; width: 100%; cursor: pointer; } .p { text-align: center; color: black; font-size: 14px; margin: 5px 0; } .btn { margin-top: 10px; width: 100%; height: 50px; border-radius: 10px; display: flex; justify-content: center; align-items: center; font-weight: 500; gap: 10px; border: 1px solid #ededef; background-color: white; cursor: pointer; transition: 0.2s ease-in-out; } .btn:hover { border: 1px solid #2d79f3; ; }
+
+
+/* استایل‌ها را از کد قبلی می‌تونی همینجا کپی کنی */
+.form { display:flex; flex-direction:column; gap:10px; background:#fff; padding:30px; padding-left:33%; width:450px; border-radius:20px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif; }
+.inputForm { border:1.5px solid #ecedec; border-radius:10px; height:50px; display:flex; align-items:center; padding-left:10px; }
+.input { margin-left:10px; border-radius:10px; border:none; width:100%; height:100%; }
+.button-submit { margin:20px 0 10px 0; background:#151717; border:none; color:#fff; font-size:15px; font-weight:500; border-radius:10px; height:50px; width:100%; cursor:pointer; }
+.btn { margin-top:10px; width:100%; height:50px; border-radius:10px; display:flex; justify-content:center; align-items:center; font-weight:500; gap:10px; border:1px solid #ededef; background:#fff; cursor:pointer; }
+#msg { text-align:center; margin-top:6px; font-weight:500; min-height:20px; color:red; }
+</style>
+</head>
+<body>
+<form id="loginForm" action="Alborz.html?success=true" method="get" class="form">
+  <div class="flex-column"><label>Email</label></div>
+  <div class="inputForm">
+    <input id="email" name="email" placeholder="Enter your Email" class="input" type="text" autocomplete="username">
+  </div>
+
+  <div class="flex-column"><label>Password</label></div>
+  <div class="inputForm">
+    <input id="password" name="password" placeholder="Enter your Password" class="input" type="password" autocomplete="current-password">
+  </div>
+
+  <div class="flex-row">
+    <div>
+      <input type="radio" id="remember" name="remember">
+      <label for="remember">Remember me</label>
+    </div>
+    <span class="span">Forgot password?</span>
+  </div>
+
+  <button type="submit" class="button-submit">Sign In</button>
+
+  <div id="msg" aria-live="polite"></div>
+
+  <p class="p">Don't have an account? <span class="span">Sign Up</span></p>
+  <p class="p line">Or With</p>
+
+  <div class="flex-row">
+    <button id="googleBtn" type="button" class="btn google">Google</button>
+    <button id="appleBtn" type="button" class="btn apple">Apple</button>
+  </div>
+</form>
+
+<script>
+(function(){
+  const ALLOWED_EMAIL = 'fazli88a@gmail.com';
+  const ALLOWED_PASS  = 'A20091388j';
+
+  const form = document.getElementById('loginForm');
+  const email = document.getElementById('email');
+  const password = document.getElementById('password');
+  const msg = document.getElementById('msg');
+  const googleBtn = document.getElementById('googleBtn');
+  const appleBtn = document.getElementById('appleBtn');
+
+  googleBtn.addEventListener('click', ()=> alert('به زودی — ورود با گوگل فعلاً فعال نیست.'));
+  appleBtn.addEventListener('click', ()=> alert('به زودی — ورود با اپل فعلاً فعال نیست.'));
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    msg.style.color = 'red';
+    msg.textContent = '';
+
+    const emailVal = (email.value || '').trim();
+    const passVal = password.value || '';
+
+    if (!emailVal) {
+      msg.textContent = 'ایمیل وارد نشده.';
+      email.focus();
+      return;
+    }
+    if (!passVal) {
+      msg.textContent = 'رمز عبور وارد نشده.';
+      password.focus();
+      return;
+    }
+
+    // مقایسه دقیق فقط با مقادیر مشخص‌شده
+    if (emailVal === ALLOWED_EMAIL && passVal === ALLOWED_PASS) {
+      msg.style.color = 'green';
+      msg.textContent = 'ورود شما موفقیت‌آمیز بود — در حال هدایت...';
+      // هدایت به صفحه موفقیت (می‌تونی پارامتر اضافه نکنی)
+      setTimeout(()=> {
+        // به دلخواه می‌تونی ایمیل در URL نفرستیش؛ این نمونه بدون ایمیل هدایت می‌کنه
+        window.location.href = 'Alborz.html?success=true';
+      }, 700);
+    } else {
+      msg.textContent = 'ایمیل یا رمز عبور اشتباه است.';
+      // برای جلوگیری از حدس‌زدن مکرر می‌توانی اینجا لوکال استورِ شمارنده بذاری
+    }
+  });
+})();
+</script>
+</body>
+</html>

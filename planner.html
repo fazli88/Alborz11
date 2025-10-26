@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>برنامه‌ریزی شخصی</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jalaali-js@3.3.0/dist/jalaali-js.min.js"></script>
+    <style>
+        @font-face {
+            font-family: 'Vazir';
+            src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/Vazir.woff2') format('woff2'),
+                 url('https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/Vazir.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        
+        :root {
+            --bg-color: #0a192f;
+            --text-color: #ffffff;
+            --primary-color: #003366;
+            --secondary-color: #FF6B35;
+            --surface-color: #172a45;
+            --error-color: #d64045;
+            --hover-color: #1e3a8a;
+            --border-color: #1e3a8a;
+        }
+        
+        body {
+            font-family: 'Vazir', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        h1 {
+            text-align: center;
+            color: var(--secondary-color);
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+        }
+        
+        h2 {
+            color: var(--secondary-color);
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 10px;
+            margin-top: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            background-color: var(--surface-color);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        th, td {
+            padding: 15px;
+            text-align: right;
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+        }
+        
+        th {
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        
+        tr:hover {
+            background-color: var(--hover-color);
+        }
+        
+        .motivation {
+            background-color: rgba(0, 51, 102, 0.3);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 30px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            font-style: italic;
+            font-size: 1.2rem;
+            color: var(--text-color);
+            border-left: 5px solid var(--secondary-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .motivation:hover {
+            background-color: rgba(0, 51, 102, 0.5);
+        }
+        
+        .section {
+            background-color: var(--surface-color);
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            margin-bottom: 30px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .btn {
+            background-color: var(--secondary-color);
+            color: #000;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Vazir';
+            font-size: 0.9rem;
+            margin-left: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background-color: #e05a2b;
+            transform: translateY(-2px);
+        }
+        
+        .btn-danger {
+            background-color: var(--error-color);
+            color: #fff;
+        }
+        
+        .btn-danger:hover {
+            background-color: #c23338;
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .date-input {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 8px;
+            border-radius: 4px;
+            font-family: 'Vazir';
+            width: 120px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        
+        .time-input {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 8px;
+            border-radius: 4px;
+            font-family: 'Vazir';
+            width: 80px;
+            text-align: center;
+        }
+        
+        .date-input::placeholder,
+        .time-input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .emoji {
+            font-size: 1.5rem;
+        }
+        
+        .week-day-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .week-date {
+            font-size: 0.9rem;
+            color: var(--secondary-color);
+        }
+        
+        @media (max-width: 768px) {
+            th, td {
+                padding: 10px;
+                font-size: 0.9rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .btn-group {
+                margin-top: 10px;
+                width: 100%;
+            }
+            
+            .btn {
+                width: 100%;
+                margin-left: 0;
+                margin-top: 5px;
+            }
+            
+            .date-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>برنامه‌ریزی شخصی</h1>
+        
+        <div class="section" id="daily-goals">
+            <h2>
+                <span class="section-title">
+                    <span class="emoji">☀️</span>
+                    اهداف روزانه
+                </span>
+                <div class="btn-group">
+                    <button class="btn" onclick="saveTable('daily-goals')">ذخیره</button>
+                    <button class="btn" onclick="exportToPDF('daily-goals', 'اهداف روزانه')">دانلود PDF</button>
+                    <button class="btn btn-danger" onclick="clearTable('daily-goals')">پاک کردن</button>
+                </div>
+            </h2>
+            <input type="text" class="date-input" id="daily-date" placeholder="تاریخ (مثال: 1402/05/15)" onchange="updateDailyDate()">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ساعت</th>
+                        <th>وظیفه / هدف</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="text" class="time-input" placeholder="08:00"></td>
+                        <td contenteditable="true" class="editable"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" class="time-input" placeholder="10:00"></td>
+                        <td contenteditable="true" class="editable"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" class="time-input" placeholder="12:00"></td>
+                        <td contenteditable="true" class="editable"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" class="time-input" placeholder="14:00"></td>
+                        <td contenteditable="true" class="editable"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" class="time-input" placeholder="16:00"></td>
+                        <td contenteditable="true" class="editable"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" class="time-input" placeholder="18:00"></td>
+                        <td contenteditable="true" class="editable"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" class="time-input" placeholder="20:00"></td>
+                        <td contenteditable="true" class="editable"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" class="time-input" placeholder="22:00"></td>
+                        <td contenteditable="true" class="editable"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="section" id="weekly-goals">
+            <h2>
+                <span class="section-title">
+                    <span class="emoji">📔</span>
+                    اهداف هفتگی
+                </span>
+                <div class="btn-group">
+                    <button class="btn" onclick="saveTable('weekly-goals')">ذخیره</button>
+                    <button class="btn" onclick="exportToPDF('weekly-goals', 'اهداف هفتگی')">دانلود PDF</button>
+                    <button class="btn btn-danger" onclick="clearTable('weekly-goals')">پاک کردن</button>
+                </div>
+            </h2>
+            <input type="text" class="date-input" id="week-start-date" placeholder="تاریخ شروع هفته (مثال: 1402/05/15)" onchange="updateWeekDates()">
+            <table>
+                <thead>
+                    <tr>
+                        <th>روز هفته</th>
+                        <th>اهداف و وظایف</th>
+                        <th>وضعیت</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="week-day-header">
+                                شنبه
+                                <span class="week-date" id="saturday-date"></span>
+                            </div>
+                        </td>
+                        <td contenteditable="true" class="editable"></td>
+                        <td contenteditable="true" class="editable"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="week-day-header">
+                                یکشنبه
+                                <span class="week-date" id="sunday-date"></span>
+                            </div>
+                        </td>
+                        <td contenteditable="true" class="editable"></td>
+                        <td contenteditable="true" class="editable"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="week-day-header">
+                                دوشنبه
+                                <span class="week-date" id="monday-date"></span>
+                            </div>
+                        </td>
+                        <td contenteditable="true" class="editable"></td>
+                        <td contenteditable="true" class="editable"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="week-day-header">
+                                سه‌شنبه
+                                <span class="week-date" id="tuesday-date"></span>
+                            </div>
+                        </td>
+                        <td contenteditable="true" class="editable"></td>
+                        <td contenteditable="true" class="editable"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="week-day-header">
+                                چهارشنبه
+                                <span class="week-date" id="wednesday-date"></span>
+                            </div>
+                        </td>
+                        <td contenteditable="true" class="editable"></td>
+                        <td contenteditable="true" class="editable"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="week-day-header">
+                                پنجشنبه
+                                <span class="week-date" id="thursday-date"></span>
+                            </div>
+                        </td>
+                        <td contenteditable="true" class="editable"></td>
+                        <td contenteditable="true" class="editable"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="week-day-header">
+                                جمعه
+                                <span class="week-date" id="friday-date"></span>
+                            </div>
+                        </td>
+                        <td contenteditable="true" class="editable"></td>
+                        <td contenteditable="true" class="editable"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- سایر بخش‌ها (اهداف بلندمدت، تناسب اندام، نقاط قوت و ضعف) مانند قبل باقی می‌مانند -->
+        
+        <div class="motivation">
+            <p id="motivation-text">"موفقیت مسیری است نه مقصد. مهم این است که در حال حرکت باشید."</p>
+        </div>
+    </div>
+
+    <script>
+        // جملات انگیزشی
+        const motivationalQuotes = [
+            "هر روز فرصتی تازه برای بهتر شدن است.",
+            "تمرکز بر پیشرفت، نه کمال.",
+            "کوچک‌ترین قدم‌ها هم می‌توانند به بزرگ‌ترین تغییرات منجر شوند.",
+            "شما قوی‌تر از آنچه فکر می‌کنید هستید.",
+            "امروز روزی است که دیروز نگرانش بودی.",
+            "موفقیت مجموع تلاش‌های کوچک روزانه است.",
+            "هر چه بیشتر به خودت باور داشته باشی، بیشتر می‌توانی انجام دهی.",
+            "مشکلات فرصت‌هایی هستند که خود را به شکل دیگری نشان می‌دهند.",
+            "تنها محدودیت‌های واقعی آنهایی هستند که برای خودمان می‌سازیم.",
+            "هر روز بهتر از دیروز باش."
+        ];
+        
+        // تغییر جمله انگیزشی به صورت تصادفی
+        function changeMotivationalQuote() {
+            const randomIndex = Math.floor(Math.random() * motivationalQuotes.length);
+            document.getElementById('motivation-text').textContent = `"${motivationalQuotes[randomIndex]}"`;
+        }
+        
+        // تبدیل تاریخ میلادی به شمسی
+        function gregorianToJalali(date) {
+            const gDate = new Date(date);
+            const jDate = jalaali.toJalaali(gDate);
+            return `${jDate.jy}/${jDate.jm}/${jDate.jd}`;
+        }
+        
+        // محاسبه تاریخ روزهای هفته بر اساس تاریخ شروع
+        function calculateWeekDates(startDate) {
+            const dates = [];
+            const date = new Date(startDate);
+            
+            // شنبه (اولین روز هفته)
+            dates.push(new Date(date));
+            
+            // یکشنبه تا جمعه
+            for (let i = 1; i < 7; i++) {
+                const newDate = new Date(date);
+                newDate.setDate(date.getDate() + i);
+                dates.push(newDate);
+            }
+            
+            return dates;
+        }
+        
+        // بروزرسانی تاریخ روزهای هفته
+        function updateWeekDates() {
+            const dateInput = document.getElementById('week-start-date').value;
+            
+            if (!dateInput) return;
+            
+            // تبدیل تاریخ شمسی به میلادی
+            const dateParts = dateInput.split('/');
+            if (dateParts.length !== 3) return;
+            
+            const jYear = parseInt(dateParts[0]);
+            const jMonth = parseInt(dateParts[1]);
+            const jDay = parseInt(dateParts[2]);
+            
+            const gDate = jalaali.toGregorian(jYear, jMonth, jDay);
+            const startDate = new Date(gDate.gy, gDate.gm - 1, gDate.gd);
+            
+            const weekDates = calculateWeekDates(startDate);
+            
+            // نمایش تاریخ‌ها
+            const dayElements = {
+                'saturday': document.getElementById('saturday-date'),
+                'sunday': document.getElementById('sunday-date'),
+                'monday': document.getElementById('monday-date'),
+                'tuesday': document.getElementById('tuesday-date'),
+                'wednesday': document.getElementById('wednesday-date'),
+                'thursday': document.getElementById('thursday-date'),
+                'friday': document.getElementById('friday-date')
+            };
+            
+            let index = 0;
+            for (const day in dayElements) {
+                dayElements[day].textContent = gregorianToJalali(weekDates[index]);
+                index++;
+            }
+            
+            // ذخیره تاریخ شروع هفته
+            localStorage.setItem('weekStartDate', dateInput);
+        }
+        
+        // بروزرسانی تاریخ روزانه
+        function updateDailyDate() {
+            const dateInput = document.getElementById('daily-date').value;
+            if (dateInput) {
+                localStorage.setItem('dailyDate', dateInput);
+            }
+        }
+        
+        // بارگذاری تاریخ‌ها از حافظه
+        function loadDates() {
+            const weekStartDate = localStorage.getItem('weekStartDate');
+            const dailyDate = localStorage.getItem('dailyDate');
+            
+            if (weekStartDate) {
+                document.getElementById('week-start-date').value = weekStartDate;
+                updateWeekDates();
+            }
+            
+            if (dailyDate) {
+                document.getElementById('daily-date').value = dailyDate;
+            }
+        }
+        
+        // تغییر جمله انگیزشی هر بار که صفحه بارگذاری می‌شود
+        window.onload = function() {
+            changeMotivationalQuote();
+            loadAllTables();
+            loadDates();
+        };
+        
+        // امکان تغییر جمله انگیزشی با کلیک
+        document.querySelector('.motivation').addEventListener('click', changeMotivationalQuote);
+        
+        // ذخیره محتوای یک جدول در localStorage
+        function saveTable(tableId) {
+            const table = document.getElementById(tableId);
+            const inputs = table.querySelectorAll('input');
+            const cells = table.querySelectorAll('.editable');
+            const data = {
+                inputs: [],
+                cells: []
+            };
+            
+            inputs.forEach(input => {
+                data.inputs.push(input.value);
+            });
+            
+            cells.forEach(cell => {
+                data.cells.push(cell.innerHTML);
+            });
+            
+            localStorage.setItem(tableId, JSON.stringify(data));
+            alert('اطلاعات با موفقیت ذخیره شدند!');
+        }
+        
+        // بارگذاری محتوای ذخیره شده برای یک جدول
+        function loadTable(tableId) {
+            const savedData = localStorage.getItem(tableId);
+            if (savedData) {
+                const data = JSON.parse(savedData);
+                const inputs = document.getElementById(tableId).querySelectorAll('input');
+                const cells = document.getElementById(tableId).querySelectorAll('.editable');
+                
+                data.inputs.forEach((value, index) => {
+                    if (inputs[index]) {
+                        inputs[index].value = value;
+                    }
+                });
+                
+                data.cells.forEach((content, index) => {
+                    if (cells[index]) {
+                        cells[index].innerHTML = content;
+                    }
+                });
+            }
+        }
+        
+        // بارگذاری تمام جداول
+        function loadAllTables() {
+            const tableIds = [
+                'daily-goals',
+                'weekly-goals',
+                'longterm-goals',
+                'fitness-goals',
+                'strengths-weaknesses'
+            ];
+            
+            tableIds.forEach(id => loadTable(id));
+        }
+        
+        // پاک کردن محتوای یک جدول
+        function clearTable(tableId) {
+            if (confirm('آیا مطمئن هستید که می‌خواهید این جدول را پاک کنید؟')) {
+                const inputs = document.getElementById(tableId).querySelectorAll('input');
+                const cells = document.getElementById(tableId).querySelectorAll('.editable');
+                
+                inputs.forEach(input => {
+                    input.value = '';
+                });
+                
+                cells.forEach(cell => {
+                    cell.innerHTML = '';
+                });
+                
+                localStorage.removeItem(tableId);
+            }
+        }
+        
+        // تبدیل به PDF با استفاده از jsPDF و html2canvas
+        function exportToPDF(tableId, title) {
+            const { jsPDF } = window.jspdf;
+            const element = document.getElementById(tableId);
+            
+            html2canvas(element).then(canvas => {
+                const imgData = canvas.toDataURL('image/png');
+                const pdf = new jsPDF('p', 'mm', 'a4');
+                const imgProps = pdf.getImageProperties(imgData);
+                const pdfWidth = pdf.internal.pageSize.getWidth();
+                const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+                
+                pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+                pdf.save(`${title}.pdf`);
+            });
+        }
+        
+        // ذخیره خودکار هر 30 ثانیه
+        setInterval(() => {
+            const tableIds = [
+                'daily-goals',
+                'weekly-goals',
+                'longterm-goals',
+                'fitness-goals',
+                'strengths-weaknesses'
+            ];
+            
+            tableIds.forEach(id => saveTable(id));
+        }, 30000);
+    </script>
+</body>
+</html>
